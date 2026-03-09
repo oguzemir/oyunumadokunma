@@ -109,7 +109,7 @@
             margin-bottom: 20px; position: relative;
         }
         .quote-mark { font-size: 4rem; color: var(--quote-color); font-family: Georgia, serif; line-height: 0; margin-top: 25px; display: inline-block; }
-        .comment-msg { font-style: italic; font-size: 1.05rem; color: #333; line-height: 1.6; margin-top: 10px; margin-bottom: 20px; word-break: break-word; }
+        .comment-msg { font-style: italic; font-size: 1.05rem; color: #333; line-height: 1.6; margin-top: 10px; margin-bottom: 20px; }
         .comment-author { text-align: right; font-size: 0.95rem; color: #555; margin-bottom: 15px; }
         .comment-author strong { color: #222; }
         .comment-footer { display: flex; align-items: center; gap: 20px; }
@@ -197,7 +197,7 @@
         <p style="margin-bottom: 10px; font-weight: 500;">Nelerin değişmesi gerekiyor?</p>
         
         <div class="input-container">
-            <input type="text" id="userInput" placeholder="Oyuncuların sesine bir cümle ekle..." maxlength="500">
+            <input type="text" id="userInput" placeholder="Oyuncuların sesine bir cümle ekle...">
             <button class="sign-btn-circle" id="mainSignBtn">→</button>
         </div>
         
@@ -234,11 +234,11 @@
             
             <div class="form-group">
                 <label>Ad veya Nickname</label>
-                <input type="text" id="nameInput" placeholder="Ad veya Nickname" maxlength="50">
+                <input type="text" id="nameInput" placeholder="Ad veya Nickname">
             </div>
             <div class="form-group">
                 <label>Şehir (İsteğe Bağlı)</label>
-                <input type="text" id="cityInput" placeholder="Şehir (İsteğe Bağlı)" maxlength="50">
+                <input type="text" id="cityInput" placeholder="Şehir (İsteğe Bağlı)">
             </div>
             
             <button class="submit-btn" id="confirmSignBtn">İmzayı Gönder</button>
@@ -267,7 +267,11 @@
                 <div id="stat-players" class="stat-overlay-text" style="top: 43%; right: 60%;">0</div>
                 <div id="stat-comments" class="stat-overlay-text" style="top: 53%; right: 45%;">0</div>
             </div>
-            
+            <a href="img/x_download.png" id="downloadTrigger" class="x-share-btn" style="background-color: #eeff00; margin-bottom: 10px; cursor: pointer;">
+                <span style="font-size: 1.1rem; margin-right: 5px;">📥</span> 
+                <span style="color: #000;">Görseli İndir</span>
+            </a>
+
             <a href="#" id="twShare" class="x-share-btn" target="_blank" style="margin-top: 0;">
                 <svg viewBox="0 0 24 24" class="x-logo">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -279,7 +283,7 @@
         </div>
     </div>
 
-    <script>
+<script>
         // --- FIREBASE AYARLARI ---
         const firebaseConfig = {
             apiKey: "AIzaSyBxuEgFO9pi40pXuzU5xPw7R6jKARO9-28",
@@ -294,17 +298,6 @@
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-
-        // --- XSS KORUMASI İÇİN YENİ FONKSİYON ---
-        function escapeHTML(str) {
-            if (!str) return "";
-            return String(str)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
 
         const forbiddenWords = [
             "amk", "rte", "oe", "akp", "chp", "ak parti", "erdoğan", "recep", "tayyip",
@@ -323,7 +316,7 @@
         // --- YENİ SAYAÇLARI DİNLEME MANTIĞI ---
         let commentsCount = 0;   
         let onlySupportCount = 0; 
-        let loadedCommentsCount = 0; 
+        let loadedCommentsCount = 0; // Toplam yüklenen yorum sayacı
 
         function updateDisplays() {
             const totalPlayers = commentsCount + onlySupportCount;
@@ -348,19 +341,15 @@
         db.ref('comments').limitToLast(50).on('child_added', s => {
             const data = s.val();
             const key = s.key;
+            const userName = data.name || "Bir Destekçi";
+            const userCity = data.city ? `, ${data.city}` : "";
+            const likesCount = data.likes || 0;
             
-            // XSS KORUMASI: Firebase'den gelen veriler ekrana basılmadan önce escape ediliyor.
-            const userName = escapeHTML(data.name || "Bir Destekçi");
-            const userCity = escapeHTML(data.city ? `, ${data.city}` : "");
-            const userMsg = escapeHTML(data.msg || "");
-            const likesCount = parseInt(data.likes) || 0;
-            
-            // Yorum HTML Taslağı
             const div = document.createElement('div');
             div.className = 'comment-item';
             div.innerHTML = `
                 <div class="quote-mark">“</div>
-                <div class="comment-msg">${userMsg}</div>
+                <div class="comment-msg">${data.msg}</div>
                 <div class="comment-author"><strong>${userName}</strong><span style="text-transform: lowercase;">${userCity}</span></div>
                 <div class="comment-footer">
                     <div class="like-btn like-btn-${key}" data-key="${key}">
@@ -392,7 +381,6 @@
                 if(likeBtn) {
                     likeBtn.addEventListener('click', function() {
                         if(this.classList.contains('liked')) return;
-                        
                         document.querySelectorAll(`.like-btn-${key}`).forEach(b => b.classList.add('liked'));
                         db.ref('comments/' + key + '/likes').transaction(currentLikes => (currentLikes || 0) + 1);
                     });
@@ -413,7 +401,40 @@
             document.getElementById('allCommentsOverlay').style.display = 'flex';
         };
 
-        // --- İMZA VE MODAL MANTIĞI (FORM VALIDATION EKLENDİ) ---
+        // --- GÖRSEL İNDİRME MANTIĞI ---
+        const downloadTrigger = document.getElementById('downloadTrigger');
+        if (downloadTrigger) {
+            downloadTrigger.onclick = function(e) {
+                e.preventDefault();
+                const imageUrl = this.getAttribute('href');
+                const fileName = 'oyunumadokunma_paylas.png';
+
+                fetch(imageUrl)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = url;
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(() => {
+                            window.URL.revokeObjectURL(url);
+                            document.body.removeChild(a);
+                        }, 100);
+                    })
+                    .catch(err => {
+                        console.error('İndirme hatası:', err);
+                        window.open(imageUrl, '_blank');
+                    });
+            };
+        }
+
+        // --- İMZA VE MODAL MANTIĞI ---
         const mainBtn = document.getElementById('mainSignBtn');
         const input = document.getElementById('userInput');
         const formOverlay = document.getElementById('formOverlay');
@@ -421,29 +442,17 @@
         const onlySupportBtn = document.getElementById('onlySupportBtn'); 
 
         mainBtn.onclick = () => {
-            const val = input.value.trim();
-            if(val.length < 5) {
-                alert("Lütfen en az 5 karakterlik bir görüş yazın.");
-                return;
-            }
-            if(val.length > 500) {
-                alert("Görüşünüz çok uzun, lütfen biraz kısaltın (Maks 500 karakter).");
+            if(input.value.trim().length < 5) {
+                alert("Lütfen biraz daha detaylı bir görüş yazın.");
                 return;
             }
             formOverlay.style.display = 'flex'; 
         };
 
         confirmBtn.onclick = () => {
-            // İkinci Katman Doğrulama
-            let msg = input.value.trim();
+            const msg = input.value.trim();
             let nickname = document.getElementById('nameInput').value.trim();
             let city = document.getElementById('cityInput').value.trim();
-
-            if (msg.length < 5 || msg.length > 500) return;
-            
-            // Kullanıcı client-side HTML maxlength'i aşarsa diye JS ile kesme
-            if (nickname.length > 50) nickname = nickname.substring(0, 50);
-            if (city.length > 50) city = city.substring(0, 50);
 
             if (!nickname) nickname = "Bir Destekçi";
 
@@ -456,30 +465,24 @@
                 timestamp: Date.now()
             });
 
-            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ses ver. https://oyuncularadokunma.com")}`;
-            const twShareBtn = document.getElementById('twShare');
-            twShareBtn.href = twUrl;
-            
-            twShareBtn.onclick = () => { db.ref('xShareCount').transaction(c => (c || 0) + 1); };
-            
+            setupShareLinks();
             input.value = "";
-            document.getElementById('nameInput').value = "";
-            document.getElementById('cityInput').value = "";
             formOverlay.style.display = 'none';
             document.getElementById('successOverlay').style.display = 'flex';
         };
 
         onlySupportBtn.onclick = () => {
             db.ref('onlySupportCount').transaction(c => (c || 0) + 1);
+            setupShareLinks();
+            document.getElementById('successOverlay').style.display = 'flex';
+        };
 
+        function setupShareLinks() {
             const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ses ver. https://oyuncularadokunma.com")}`;
             const twShareBtn = document.getElementById('twShare');
             twShareBtn.href = twUrl;
-            
             twShareBtn.onclick = () => { db.ref('xShareCount').transaction(c => (c || 0) + 1); };
-            
-            document.getElementById('successOverlay').style.display = 'flex';
-        };
+        }
     </script>
 </body>
 </html>

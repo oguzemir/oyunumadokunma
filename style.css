@@ -48,3 +48,20 @@
     top: 55.5%;
     right: 39%;
 }
+
+.x-share-btn { 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    background-color: #000000; 
+    color: #ffffff; 
+    text-decoration: none; /* Çizgiyi kaldırır */
+    padding: 14px 28px; 
+    border-radius: 30px; 
+    font-weight: bold; 
+    font-size: 1.05rem; 
+    transition: opacity 0.2s, transform 0.2s; 
+    box-sizing: border-box; 
+    width: 100%; /* Tam genişlik sağlar */
+}
