@@ -438,7 +438,7 @@
                 timestamp: Date.now()
             });
 
-            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ver. qweqwe.com")}`;
+            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ses ver. https://oyuncularadokunma.com")}`;
             const twShareBtn = document.getElementById('twShare');
             twShareBtn.href = twUrl;
             
@@ -452,7 +452,7 @@
         onlySupportBtn.onclick = () => {
             db.ref('onlySupportCount').transaction(c => (c || 0) + 1);
 
-            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ver. qweqwe.com")}`;
+            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ses ver. https://oyuncularadokunma.com")}`;
             const twShareBtn = document.getElementById('twShare');
             twShareBtn.href = twUrl;
             
