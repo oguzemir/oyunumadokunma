@@ -1,0 +1,50 @@
+/* Başarı Ekranı Popup Düzenlemesi */
+#successOverlay .popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Her şeyi yatayda ortalar */
+    text-align: center;
+    max-width: 400px; /* Popup'ın kendisini daralttık */
+    padding: 30px;
+}
+
+/* Görseli Küçük Bir Kareye Hapset ve Ortala */
+.share-preview-container {
+    position: relative;
+    width: 280px;  /* Genişliği 280px'e düşürdük (daha kibar durur) */
+    height: 280px; /* Tam kare 1:1 oran */
+    margin: 0 auto 25px auto; /* Üstten/alttan boşluk ve YATAYDA ORTALA */
+    border-radius: 15px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 1px solid #eee;
+}
+
+.share-preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Kareyi tam doldurur */
+    display: block;
+}
+
+/* Sayıların Konumu (280px'e göre yeniden hizalandı) */
+.dynamic-stat {
+    position: absolute;
+    color: #fde047; /* Sarı */
+    font-weight: 800;
+    font-size: 1rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    pointer-events: none; /* Sayıların üzerine tıklanmasın */
+}
+
+/* Sayıları "oyuncu destek verdi" ve "yorum yazıldı" metinlerinin tam başına koyar */
+#stat-players {
+    top: 41.5%; 
+    right: 79%;
+}
+
+#stat-comments {
+    top: 55.5%;
+    right: 39%;
+}
