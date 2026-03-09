@@ -65,3 +65,60 @@
     box-sizing: border-box; 
     width: 100%; /* Tam genişlik sağlar */
 }
+
+/* Destekçiler Alanı Genel Kapsayıcı */
+.supporters-area {
+    background: #ffffff;
+    padding: 60px 0; /* Biraz daha dikey boşluk ferahlatır */
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Başlığı ve wrapper'ı ortalar */
+}
+
+/* Slider Wrapper */
+.supporters-marquee-wrapper {
+    width: 100%;
+    max-width: 1200px; /* Çok yayılmaması için sınır koyabilirsin */
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center; /* İçindeki track'i ortalar */
+    align-items: center;
+    height: 120px; 
+}
+
+/* Logo Taşıyıcı (Track) */
+.supporters-marquee-track {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Logolar azsa ortalar */
+    gap: 40px;
+    width: max-content;
+    /* Eğer sadece 2-3 logon varsa animasyonu durdurmak isteyebilirsin */
+    /* Animasyon logolar çoksa çalışmalı */
+    animation: scrollLeft 25s linear infinite;
+}
+
+.supporters-marquee-track img {
+    height: 70px; /* Boyutu standartlaştırdık */
+    width: 70px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 50%;
+    padding: 12px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.supporters-marquee-track img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
