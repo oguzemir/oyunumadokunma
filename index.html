@@ -49,7 +49,6 @@
             width: 100%; padding: 25px 30px; font-size: 1.1rem;
             border: 1px solid #e2e8f0; border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); outline: none; box-sizing: border-box;
-            padding-right: 70px;
         }
         .sign-btn-circle {
             position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
@@ -72,32 +71,41 @@
             margin-bottom: 30px;
             transition: background-color 0.2s, transform 0.2s;
         }
-        .only-support-btn:hover { background-color: #cbd5e1; transform: scale(1.02); color: #334155; }
-
-        /* Daha Fazla Gör Butonu */
-        .see-more-btn {
-            background-color: transparent;
-            color: var(--accent-color);
-            border: 2px solid var(--accent-color);
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            display: none; /* JS ile açılacak */
+        .only-support-btn:hover {
+            background-color: #cbd5e1;
+            transform: scale(1.02);
+            color: #334155;
         }
-        .see-more-btn:hover { background-color: var(--accent-color); color: white; }
 
         /* İstatistik Alanı */
         .stats-container {
-            display: flex; flex-direction: column; gap: 12px; margin-top: 10px; text-align: left;
-            background: white; padding: 20px 30px; border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03); width: 100%; max-width: 650px;
-            box-sizing: border-box; border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+            text-align: left;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            width: 100%;
+            max-width: 650px;
+            box-sizing: border-box;
+            border: 1px solid #f1f5f9;
         }
-        .stat-item { font-size: 1.05rem; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 10px; }
-        .stat-item span { font-weight: 800; color: var(--text-dark); font-size: 1.15rem; }
+        .stat-item {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stat-item span {
+            font-weight: 800;
+            color: var(--text-dark);
+            font-size: 1.15rem;
+        }
 
         /* Yorum Kartları */
         .comments-area { max-width: 750px; width: 90%; margin: 40px auto; }
@@ -105,19 +113,66 @@
         .comments-header p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px; }
 
         .comment-item {
-            background: var(--card-bg); padding: 25px 30px; border-radius: 12px;
-            margin-bottom: 20px; position: relative;
+            background: var(--card-bg);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            position: relative;
         }
-        .quote-mark { font-size: 4rem; color: var(--quote-color); font-family: Georgia, serif; line-height: 0; margin-top: 25px; display: inline-block; }
-        .comment-msg { font-style: italic; font-size: 1.05rem; color: #333; line-height: 1.6; margin-top: 10px; margin-bottom: 20px; }
-        .comment-author { text-align: right; font-size: 0.95rem; color: #555; margin-bottom: 15px; }
-        .comment-author strong { color: #222; }
-        .comment-footer { display: flex; align-items: center; gap: 20px; }
+        
+        .quote-mark {
+            font-size: 4rem;
+            color: var(--quote-color);
+            font-family: Georgia, serif;
+            line-height: 0;
+            margin-top: 25px;
+            display: inline-block;
+        }
 
-        .like-btn { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: bold; color: #444; transition: 0.2s; }
-        .like-btn svg { width: 22px; height: 22px; fill: none; stroke: #444; stroke-width: 2; transition: 0.2s; }
+        .comment-msg {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.6;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        .comment-author {
+            text-align: right;
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .comment-author strong { color: #222; }
+
+        .comment-footer {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .like-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #444;
+            transition: 0.2s;
+        }
+        .like-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: #444;
+            stroke-width: 2;
+            transition: 0.2s;
+        }
         .like-btn:hover { opacity: 0.7; }
         .like-btn.liked svg { fill: #e0245e; stroke: #e0245e; }
+        
         .dots-menu { font-size: 1.2rem; font-weight: bold; color: #555; cursor: pointer; letter-spacing: 2px;}
 
         /* Footer */
@@ -130,57 +185,45 @@
             background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); 
             z-index: 100; justify-content: center; align-items: center; 
         }
-        .popup { text-align: center; max-width: 400px; padding: 20px; width: 90%; box-sizing: border-box; }
+        .popup { text-align: center; max-width: 400px; padding: 20px; width: 90%; }
         
         /* Modern Form Popup Stilleri */
         .form-group { text-align: left; margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: var(--text-dark); }
-        .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
-        .submit-btn { background-color: var(--accent-color); color: white; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; font-size: 1rem; }
-
-        /* Yeni Modern X Butonu Stilleri */
-        .x-share-btn { 
-            display: inline-flex; align-items: center; justify-content: center; gap: 10px; 
-            background-color: #000000; color: #ffffff; text-decoration: none; padding: 14px 28px; 
-            border-radius: 30px; font-weight: bold; font-size: 1.05rem; margin-top: 25px; 
-            transition: opacity 0.2s, transform 0.2s; box-sizing: border-box; width: 100%;
+        .form-group input {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;
+            box-sizing: border-box; font-size: 1rem;
         }
-        .x-share-btn:hover { opacity: 0.8; transform: scale(1.02); }
-        .x-logo { width: 18px; height: 18px; fill: #ffffff; }
+        .submit-btn {
+            background-color: var(--accent-color); color: white; border: none;
+            padding: 15px 30px; border-radius: 30px; cursor: pointer;
+            font-weight: bold; width: 100%; margin-top: 10px; font-size: 1rem;
+        }
 
-        /* Başarı (Teşekkürler) Popup Özelleştirmesi */
-        .success-popup { background: #ffffff; border-radius: 16px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-height: 90vh; overflow-y: auto; }
-        .share-image-wrapper { position: relative; width: 100%; max-width: 400px; aspect-ratio: 1 / 1; margin: 0 auto 15px auto; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .share-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; border: none; padding: 0; margin: 0; }
-        .stat-overlay-text { position: absolute; color: #fde047; font-weight: 900; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); text-align: right; font-size: clamp(12px, 4vw, 15px); }
-
-        /* Tüm Yorumlar Popup Stilleri */
-        .all-comments-popup { max-width: 700px; width: 95%; height: 85vh; padding: 0; display: flex; flex-direction: column; overflow: hidden; border-radius: 16px; background: white; box-shadow: 0 10px 50px rgba(0,0,0,0.15); }
-        .all-comments-header { padding: 20px 30px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-        .all-comments-body { flex: 1; overflow-y: auto; padding: 20px 30px; background: #f9fafb; text-align: left; }
-
-        /* Mobil Sorgular */
-        @media (max-width: 768px) {
-            header { padding: 15px 5%; justify-content: center; } 
-            .hero { padding: 40px 15px; }
-            .hero h1 { font-size: 2.5rem; }
-            .sub-text { font-size: 1rem; margin: 15px 0; }
-            .input-container input { padding: 20px 60px 20px 20px; font-size: 1rem; }
-            .sign-btn-circle { width: 40px; height: 40px; font-size: 1.2rem; right: 10px; }
-            .only-support-btn { padding: 12px 20px; font-size: 0.9rem; width: 100%; }
-            .stats-container { padding: 15px 20px; gap: 8px; }
-            .stat-item { font-size: 0.95rem; }
-            .stat-item span { font-size: 1.05rem; }
-            .comments-area { width: 100%; padding: 0 15px; box-sizing: border-box; margin: 25px auto; }
-            .comments-header h2 { font-size: 1.5rem; }
-            .comments-header p { font-size: 1rem; margin-bottom: 15px; }
-            .comment-item { padding: 20px 20px; }
-            .quote-mark { font-size: 3rem; margin-top: 15px; }
-            .comment-msg { font-size: 0.95rem; }
-            footer { text-align: center; padding: 30px 15px; }
-            .footer-desc { margin-left: auto; margin-right: auto; text-align: center; }
-            .success-popup { padding: 20px; }
-            .all-comments-header, .all-comments-body { padding: 15px 20px; }
+        /* Modern X Butonu Stilleri */
+        .x-share-btn { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            background-color: #000000; 
+            color: #ffffff; 
+            text-decoration: none; 
+            padding: 14px 28px; 
+            border-radius: 30px; 
+            font-weight: bold; 
+            font-size: 1.05rem; 
+            margin-top: 25px; 
+            transition: opacity 0.2s, transform 0.2s; 
+        }
+        .x-share-btn:hover { 
+            opacity: 0.8; 
+            transform: scale(1.02);
+        }
+        .x-logo {
+            width: 18px;
+            height: 18px;
+            fill: #ffffff;
         }
     </style>
 </head>
@@ -197,7 +240,7 @@
         <p style="margin-bottom: 10px; font-weight: 500;">Nelerin değişmesi gerekiyor?</p>
         
         <div class="input-container">
-            <input type="text" id="userInput" placeholder="Oyuncuların sesine bir cümle ekle...">
+            <input type="text" id="userInput" placeholder="Oyuncuların sesine bir cümle ekle..." maxlength="250">
             <button class="sign-btn-circle" id="mainSignBtn">→</button>
         </div>
         
@@ -216,10 +259,6 @@
             <p>Öne Çıkan Yorumlar</p>
         </div>
         <div id="commentList"></div>
-        
-        <div style="text-align: center; margin-top: 10px;">
-            <button id="seeMoreBtn" class="see-more-btn">Daha Fazla Gör</button>
-        </div>
     </section>
 
     <footer>
@@ -234,11 +273,11 @@
             
             <div class="form-group">
                 <label>Ad veya Nickname</label>
-                <input type="text" id="nameInput" placeholder="Ad veya Nickname">
+                <input type="text" id="nameInput" placeholder="Ad veya Nickname" maxlength="25">
             </div>
             <div class="form-group">
                 <label>Şehir (İsteğe Bağlı)</label>
-                <input type="text" id="cityInput" placeholder="Şehir (İsteğe Bağlı)">
+                <input type="text" id="cityInput" placeholder="Şehir (İsteğe Bağlı)" maxlength="25">
             </div>
             
             <button class="submit-btn" id="confirmSignBtn">İmzayı Gönder</button>
@@ -246,29 +285,23 @@
         </div>
     </div>
 
-    <div class="overlay" id="allCommentsOverlay">
-        <div class="popup all-comments-popup">
-            <div class="all-comments-header">
-                <h2 style="margin: 0; font-size: 1.5rem; text-align: left; color: var(--text-dark);">Tüm Yorumlar</h2>
-                <button onclick="document.getElementById('allCommentsOverlay').style.display='none'" style="border:none; background:none; font-size: 2.2rem; cursor:pointer; color: #888; line-height: 1;">&times;</button>
-            </div>
-            <div id="popupCommentList" class="all-comments-body">
-                </div>
-        </div>
-    </div>
-
     <div class="overlay" id="successOverlay">
-        <div class="popup success-popup">
+        <div class="popup" style="background: #ffffff; border-radius: 16px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
             <h2 style="font-size: 1.8rem; margin-bottom: 5px;">Teşekkürler!</h2>
             <p style="color: #666; margin-bottom: 20px;">Sesin sisteme kaydedildi. Bu kareyi paylaş!</p>
             
-            <div class="share-image-wrapper">
-                <img src="img/X_share.png" alt="Paylaşım Görseli">
-                <div id="stat-players" class="stat-overlay-text" style="top: 43%; right: 60%;">0</div>
-                <div id="stat-comments" class="stat-overlay-text" style="top: 53%; right: 45%;">0</div>
+            <div style="position: relative; width: 400px; height: 400px; margin: 0 auto 15px auto; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                <img src="img/X_share.png" alt="Paylaşım Görseli" style="width: 100%; height: 100%; object-fit: cover; display: block; border: none; padding: 0; margin: 0;">
+                
+                <div id="stat-players" style="position: absolute; top: 47%; right: 41%; color: #fde047; font-weight: 900; font-size: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); text-align: right;">0</div>
+                <div id="stat-comments" style="position: absolute; top: 55%; right: 30%; color: #fde047; font-weight: 900; font-size: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); text-align: right;">0</div>
             </div>
             
-            <a href="#" id="twShare" class="x-share-btn" target="_blank" style="margin-top: 0;">
+            <button id="downloadImageBtn" style="width: 100%; background-color: #fde047; color: #000; padding: 14px 28px; border-radius: 30px; border: none; font-weight: bold; font-size: 1.05rem; cursor: pointer; margin-bottom: 12px; transition: transform 0.2s;">
+                📥 Görseli İndir (PNG)
+            </button>
+            
+            <a href="#" id="twShare" class="x-share-btn" target="_blank" style="width: 100%; box-sizing: border-box; margin-top: 0;">
                 <svg viewBox="0 0 24 24" class="x-logo">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
@@ -295,10 +328,26 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
+        // --- XSS VE KÜFÜR FİLTRESİ ---
         const forbiddenWords = [
             "amk", "rte", "oe", "akp", "chp", "ak parti", "erdoğan", "recep", "tayyip",
             "meclis", "milletvekili", "milletvekilleri", "hdp", "dem", "islam", "sex"
         ]; 
+        
+        // HTML etiketlerini zararsız hale getiren XSS koruma fonksiyonu
+        function escapeHTML(str) {
+            if (!str) return "";
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+
         function filterText(text) {
             if(!text) return "";
             let filtered = text;
@@ -306,43 +355,50 @@
                 const reg = new RegExp(word, "gi");
                 filtered = filtered.replace(reg, "***");
             });
-            return filtered;
+            // Metni en son XSS kalkanından geçirerek döndür
+            return escapeHTML(filtered);
         }
 
-        // --- YENİ SAYAÇLARI DİNLEME MANTIĞI ---
+        // --- SAYAÇLARI DİNLEME MANTIĞI ---
         let commentsCount = 0;   
         let onlySupportCount = 0; 
-        let loadedCommentsCount = 0; // Toplam yüklenen yorum sayacı
 
         function updateDisplays() {
             const totalPlayers = commentsCount + onlySupportCount;
             const formattedPlayers = totalPlayers.toLocaleString('tr-TR');
             const formattedComments = commentsCount.toLocaleString('tr-TR');
 
+            // Ana sayfa sayaçları
             document.getElementById('count').textContent = formattedPlayers;
             document.getElementById('commentCountDisplay').textContent = formattedComments;
+
+            // Popup içindeki görselin üzerine binen sayılar
             document.getElementById('stat-players').textContent = formattedPlayers;
             document.getElementById('stat-comments').textContent = formattedComments;
         }
 
-        db.ref('signatureCount').on('value', s => { commentsCount = s.val() || 0; updateDisplays(); });
-        db.ref('onlySupportCount').on('value', s => { onlySupportCount = s.val() || 0; updateDisplays(); });
-        db.ref('xShareCount').on('value', s => { document.getElementById('xShareCountDisplay').textContent = (s.val() || 0).toLocaleString('tr-TR'); });
+        db.ref('signatureCount').on('value', s => {
+            commentsCount = s.val() || 0;
+            updateDisplays();
+        });
 
-        // --- YORUMLARI DİNLE VE 2 LİSTEYE BÖL ---
-        const commentListMain = document.getElementById('commentList');
-        const popupCommentList = document.getElementById('popupCommentList');
-        const seeMoreBtn = document.getElementById('seeMoreBtn');
+        db.ref('onlySupportCount').on('value', s => {
+            onlySupportCount = s.val() || 0;
+            updateDisplays();
+        });
 
-        // Limiti 50'ye çıkardık ki "Tüm Yorumlar" kısmı dolu dursun
-        db.ref('comments').limitToLast(50).on('child_added', s => {
+        db.ref('xShareCount').on('value', s => {
+            document.getElementById('xShareCountDisplay').textContent = (s.val() || 0).toLocaleString('tr-TR');
+        });
+
+        // --- YORUMLARI DİNLE ---
+        db.ref('comments').limitToLast(30).on('child_added', s => {
             const data = s.val();
             const key = s.key;
             const userName = data.name || "Bir Destekçi";
             const userCity = data.city ? `, ${data.city}` : "";
             const likesCount = data.likes || 0;
             
-            // Yorum HTML Taslağı
             const div = document.createElement('div');
             div.className = 'comment-item';
             div.innerHTML = `
@@ -350,62 +406,30 @@
                 <div class="comment-msg">${data.msg}</div>
                 <div class="comment-author"><strong>${userName}</strong><span style="text-transform: lowercase;">${userCity}</span></div>
                 <div class="comment-footer">
-                    <div class="like-btn like-btn-${key}" data-key="${key}">
+                    <div class="like-btn" id="like-${key}">
                         <svg viewBox="0 0 24 24">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                        <span class="like-count-${key}">${likesCount}</span>
+                        <span id="like-count-${key}">${likesCount}</span>
                     </div>
                     <div class="dots-menu">•••</div>
                 </div>
             `;
+            document.getElementById('commentList').prepend(div);
 
-            // Elementi klonlayıp her iki listeye de (Ana sayfa ve Popup) ekliyoruz
-            const popupDiv = div.cloneNode(true);
-            commentListMain.prepend(div);
-            popupCommentList.prepend(popupDiv);
-
-            loadedCommentsCount++;
-
-            // Ana sayfadaki listeyi 5 ile sınırla (En eski olanı DOM'dan siler)
-            if (commentListMain.children.length > 5) {
-                commentListMain.lastElementChild.remove();
-            }
-
-            // 5 yorumdan fazlası geldiyse "Daha Fazla Gör" butonunu aktif et
-            if (loadedCommentsCount > 5) {
-                seeMoreBtn.style.display = 'inline-block';
-            }
-
-            // Her iki listedeki like butonlarına tıklama event'i ekle
-            [div, popupDiv].forEach(element => {
-                const likeBtn = element.querySelector(`.like-btn-${key}`);
-                if(likeBtn) {
-                    likeBtn.addEventListener('click', function() {
-                        if(this.classList.contains('liked')) return;
-                        
-                        // Aynı key'e sahip tüm butonları anında 'liked' yap (Optimizm)
-                        document.querySelectorAll(`.like-btn-${key}`).forEach(b => b.classList.add('liked'));
-                        db.ref('comments/' + key + '/likes').transaction(currentLikes => (currentLikes || 0) + 1);
-                    });
-                }
+            document.getElementById(`like-${key}`).addEventListener('click', function() {
+                if(this.classList.contains('liked')) return;
+                this.classList.add('liked');
+                db.ref('comments/' + key + '/likes').transaction(currentLikes => (currentLikes || 0) + 1);
             });
         });
 
-        // Like Sayılarını Güncelleme (Ana sayfa ve Popup'ı aynı anda günceller)
         db.ref('comments').on('child_changed', s => {
             const data = s.val();
             const key = s.key;
-            const countSpans = document.querySelectorAll(`.like-count-${key}`);
-            countSpans.forEach(span => {
-                span.innerText = data.likes || 0;
-            });
+            const countSpan = document.getElementById(`like-count-${key}`);
+            if(countSpan) countSpan.innerText = data.likes || 0;
         });
-
-        // "Daha Fazla Gör" Butonu Tıklaması
-        seeMoreBtn.onclick = () => {
-            document.getElementById('allCommentsOverlay').style.display = 'flex';
-        };
 
         // --- İMZA VE MODAL MANTIĞI ---
         const mainBtn = document.getElementById('mainSignBtn');
@@ -414,18 +438,36 @@
         const confirmBtn = document.getElementById('confirmSignBtn');
         const onlySupportBtn = document.getElementById('onlySupportBtn'); 
 
+        // 1. Aşama: Yorum Form Validasyonu
         mainBtn.onclick = () => {
-            if(input.value.trim().length < 5) {
-                alert("Lütfen biraz daha detaylı bir görüş yazın.");
+            const msg = input.value.trim();
+            
+            if(msg.length < 5) {
+                alert("Lütfen biraz daha detaylı bir görüş yazın. (En az 5 karakter)");
                 return;
             }
+            if(msg.length > 250) {
+                alert("Görüşünüz çok uzun. Lütfen en fazla 250 karakter girin.");
+                return;
+            }
+            
             formOverlay.style.display = 'flex'; 
         };
 
+        // 2. Aşama: İsim/Şehir Form Validasyonu ve Gönderimi
         confirmBtn.onclick = () => {
             const msg = input.value.trim();
             let nickname = document.getElementById('nameInput').value.trim();
             let city = document.getElementById('cityInput').value.trim();
+
+            if (nickname.length > 25) {
+                alert("Ad veya Nickname çok uzun (En fazla 25 karakter).");
+                return;
+            }
+            if (city.length > 25) {
+                alert("Şehir adı çok uzun (En fazla 25 karakter).");
+                return;
+            }
 
             if (!nickname) nickname = "Bir Destekçi";
 
@@ -438,28 +480,79 @@
                 timestamp: Date.now()
             });
 
-            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ses ver. https://oyuncularadokunma.com")}`;
+            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ver. qweqwe.com")}`;
             const twShareBtn = document.getElementById('twShare');
             twShareBtn.href = twUrl;
             
-            twShareBtn.onclick = () => { db.ref('xShareCount').transaction(c => (c || 0) + 1); };
+            twShareBtn.onclick = () => {
+                db.ref('xShareCount').transaction(c => (c || 0) + 1);
+            };
             
             input.value = "";
             formOverlay.style.display = 'none';
             document.getElementById('successOverlay').style.display = 'flex';
         };
 
+        // Sadece Destek Ver Butonu
         onlySupportBtn.onclick = () => {
             db.ref('onlySupportCount').transaction(c => (c || 0) + 1);
 
-            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ses ver. https://oyuncularadokunma.com")}`;
+            const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent("Ben de #OYUNUMADOKUNMA hashtag'ine imza verdim. Sen de ver. qweqwe.com")}`;
             const twShareBtn = document.getElementById('twShare');
             twShareBtn.href = twUrl;
             
-            twShareBtn.onclick = () => { db.ref('xShareCount').transaction(c => (c || 0) + 1); };
+            twShareBtn.onclick = () => {
+                db.ref('xShareCount').transaction(c => (c || 0) + 1);
+            };
             
             document.getElementById('successOverlay').style.display = 'flex';
         };
+
+        // --- CANVAS İLE GÖRSEL İNDİRME İŞLEMİ ---
+        document.getElementById('downloadImageBtn').addEventListener('click', function() {
+            const totalPlayers = commentsCount + onlySupportCount;
+            const formattedPlayers = totalPlayers.toLocaleString('tr-TR');
+            const formattedComments = commentsCount.toLocaleString('tr-TR');
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.crossOrigin = "Anonymous"; 
+            img.src = 'img/X_share.png';
+
+            img.onload = function() {
+                canvas.width = img.width; 
+                canvas.height = img.height;
+
+                ctx.drawImage(img, 0, 0);
+
+                ctx.fillStyle = '#fde047'; 
+                ctx.font = 'bold 45px "Segoe UI", Arial, sans-serif'; 
+                ctx.textAlign = 'right'; 
+                ctx.textBaseline = 'top'; 
+
+                ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                ctx.shadowBlur = 4;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+
+                const xPlayers = canvas.width * 0.59;
+                const yPlayers = canvas.height * 0.47; 
+                
+                const xComments = canvas.width * 0.70;
+                const yComments = canvas.height * 0.55; 
+
+                ctx.fillText(formattedPlayers, xPlayers, yPlayers);
+                ctx.fillText(formattedComments, xComments, yComments);
+
+                const dataUrl = canvas.toDataURL('image/png');
+                const downloadLink = document.createElement('a');
+                downloadLink.download = 'oyunumadokunma_sesver.png'; 
+                downloadLink.href = dataUrl;
+                downloadLink.click();
+            };
+        });
     </script>
 </body>
 </html>
