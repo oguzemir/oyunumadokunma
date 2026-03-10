@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Güvenli Admin Paneli</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 20px; background: #f0f2f5; }
+        #loginArea { max-width: 350px; margin: 100px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-primary { background: #2f00ff; color: white; width: 100%; }
+        .admin-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .featured { border-left: 6px solid #2f00ff; background: #f0f4ff; }
+        .logout-btn { background: #ff4d4d; color: white; float: right; }
+    </style>
+</head>
+<body>
+
+    <div id="loginArea">
+        <h2>Admin Girişi</h2>
+        <input type="email" id="email" placeholder="E-posta">
+        <input type="password" id="password" placeholder="Şifre">
+        <button class="btn btn-primary" onclick="login()">Giriş Yap</button>
+    </div>
+
+    <div id="adminPanel" style="display:none;">
+        <button class="btn logout-btn" onclick="logout()">Çıkış Yap</button>
+        <h1>Yorum Yönetimi</h1>
+        <hr>
+        <div id="adminCommentList"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Giriş Yapma Fonksiyonu
+        function login() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, pass)
+                .catch(error => alert("Giriş başarısız: " + error.message));
+        }
+
+        // Çıkış Yapma Fonksiyonu
+        function logout() {
+            firebase.auth().signOut().then(() => location.reload());
+        }
+
+        // Oturum Durumunu Dinle
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                // Giriş yapılmış
+                document.getElementById('loginArea').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadAdminComments();
+            } else {
+                // Giriş yapılmamış
+                document.getElementById('loginArea').style.display = 'block';
+                document.getElementById('adminPanel').style.display = 'none';
+            }
+        });
+
+        function loadAdminComments() {
+            db.ref('comments').on('value', snapshot => {
+                const list = document.getElementById('adminCommentList');
+                list.innerHTML = "";
+                snapshot.forEach(child => {
+                    const data = child.val();
+                    const key = child.key;
+                    const isFeatured = data.isFeatured || false;
+
+                    const div = document.createElement('div');
+                    div.className = `admin-card ${isFeatured ? 'featured' : ''}`;
+                    div.innerHTML = `
+                        <div>
+                            <strong>${data.name}</strong>: ${data.msg}
+                        </div>
+                        <div>
+                            <button class="btn" style="background:#2f00ff; color:white;" onclick="toggleFeature('${key}', ${isFeatured})">
+                                ${isFeatured ? 'Öne Çıkarmayı Kaldır' : 'Öne Çıkar'}
+                            </button>
+                            <button class="btn" style="background:#ff4d4d; color:white;" onclick="deleteComment('${key}')">Sil</button>
+                        </div>
+                    `;
+                    list.prepend(div);
+                });
+            });
+        }
+
+        function deleteComment(key) {
+            if(confirm("Silinsin mi?")) db.ref('comments/' + key).remove();
+        }
+
+        function toggleFeature(key, status) {
+            db.ref('comments/' + key).update({ isFeatured: !status });
+        }
+    </script>
+</body>
+</html>

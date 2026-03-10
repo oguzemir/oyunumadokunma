@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tüm Yorumlar | #OYUNUMADOKUNMA</title>
+    <link rel="icon" type="image/png" href="img/ico.png">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-dark: #2d2d3a;
+            --text-muted: #65676b;
+            --accent-color: #2f00ff;
+            --card-bg: #f4f7fb;
+            --quote-color: #4361ee;
+        }
+
+        body {
+            /* Ana sayfadaki dolgun font ailesi */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; 
+            background-color: #f9fafb; 
+            color: var(--text-dark);
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        header { 
+            padding: 20px 5%; display: flex; justify-content: space-between; 
+            align-items: center; background: white; border-bottom: 1px solid #eee;
+            position: sticky; top: 0; z-index: 50;
+        }
+        
+        /* Orijinal Bold Logo Stili */
+        .hashtag { 
+            font-weight: 800; 
+            color: var(--text-dark); 
+            font-size: 1rem;
+            padding: 10px 20px;
+            background-color: var(--card-bg);
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: default;
+            user-select: none;
+        }
+
+        .back-btn { 
+            text-decoration: none; 
+            color: var(--accent-color); 
+            font-weight: bold; 
+            border: 2px solid var(--accent-color); 
+            padding: 10px 25px; 
+            border-radius: 25px; 
+            transition: 0.2s; 
+            font-size: 0.95rem;
+        }
+        .back-btn:hover { 
+            background: var(--accent-color); 
+            color: white; 
+        }
+
+        .comments-container { 
+            max-width: 1400px; 
+            width: 95%; 
+            margin: 60px auto; 
+            flex: 1;
+        }
+
+        .page-title { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            margin-bottom: 10px; 
+            color: var(--text-dark);
+        }
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+
+        #allCommentsList { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 25px; 
+        }
+
+        /* Orijinal Dolgun Kart Tasarımı */
+        .comment-item { 
+            background: var(--card-bg); 
+            padding: 25px 30px; 
+            border-radius: 12px; 
+            border: none; 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        
+        .quote-mark { 
+            font-size: 4rem; 
+            color: var(--quote-color); 
+            font-family: Georgia, serif; 
+            line-height: 0; 
+            margin-top: 25px; 
+            display: inline-block; 
+        }
+
+        .comment-msg { 
+            font-style: italic; 
+            font-size: 1.05rem; 
+            color: #333; 
+            line-height: 1.6; 
+            margin-top: 10px; 
+            margin-bottom: 20px; 
+            flex-grow: 1; 
+        }
+
+        .comment-author { 
+            text-align: right; 
+            font-size: 0.95rem; 
+            color: #555; 
+            margin-bottom: 15px; 
+        }
+        .comment-author strong { 
+            color: #222; 
+            font-weight: bold;
+        }
+
+        .comment-footer { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            border-top: 1px solid #e2e8f0; 
+            padding-top: 15px; 
+        }
+
+        .like-btn { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            color: #444; 
+            transition: 0.2s; 
+        }
+        .like-btn svg { width: 22px; height: 22px; fill: none; stroke: #444; stroke-width: 2; }
+        .like-btn.liked svg { fill: #e0245e; stroke: #e0245e; }
+
+        @media (max-width: 992px) { #allCommentsList { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { 
+            #allCommentsList { grid-template-columns: 1fr; } 
+            header { flex-direction: column; gap: 15px; text-align: center; } 
+            .page-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <script src="header-component.js"></script>
+    <main-header></main-header>
+
+    <div class="comments-container">
+        <h1 class="page-title">Tüm Oyuncu Yorumları</h1>
+        <p class="page-subtitle">Topluluğun sesine kulak verin.</p>
+        <div id="allCommentsList"></div>
+    </div>
+
+    <script src="footer-component.js"></script>
+    <main-footer></main-footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
