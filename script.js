@@ -77,6 +77,12 @@ if (supportersTrack) {
             title: "Dottopus", 
             desc: "Dottopus, oyun geliştiricileri, tasarımcılar ve oyun meraklılarını bir araya getiren bir topluluktur. Amaçları yerel oyun geliştirme ekosistemini güçlendirmek.",
             link: "https://www.instagram.com/dottopus" 
+        },
+        { 
+            file: "4_ggog.png", 
+            title: "GGOG Derneği", 
+            desc: "Genç Girişimciler ve Oyun Geliştiricileri Derneği (GGOG), genç yetenekleri ve girişimcileri bir araya getirerek eğitim, mentorluk ve bağlantı fırsatları sunmayı amaçlayan bir oluşumdur. Türkiye’yi oyun geliştirme ve teknoloji girişimciliğinde güçlü bir merkez haline getirmeyi hedefler.",
+            link: "https://ggogd.org/" 
         }
     ];
 
